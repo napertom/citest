@@ -1,14 +1,14 @@
 pipeline {
     agent none
     stages {
-        stage('Example Build') {
+        stage('Example Linux') {
             agent { docker 'centos' } 
             steps {
                 echo 'Hello, Linux'
-                sh 'gcc --version'
+                sh 'uname -a'
             }
         }
-        stage('Example Test') {
+        stage('Example JDK') {
             agent { docker 'openjdk:8-jre' } 
             steps {
                 echo 'Hello, JDK'
