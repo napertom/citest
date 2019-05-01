@@ -1,32 +1,19 @@
 pipeline {
-agent any
-stages {
-stage('compile stage') {
-steps {
-withMaven(maven : 'M3') {
-sh 'mvn clean compile'
-}
-}
-}
-}
-
-stages {
-stage('test stage') {
-steps {
-withMaven(maven : 'M3') {
-sh 'mvn test'
-}
-}
-}
-}
-
-stages {
-stage('deployment stage') {
-steps {
-withMaven(maven : 'M3') {
-sh 'mvn deploy'
-}
-}
-}
-}
+    agent none
+    stages {
+        stage('Example Build') {
+            agent { docker 'centos' } 
+            steps {
+                echo 'Hello, Linux'
+                sh 'gcc --version'
+            }
+        }
+        stage('Example Test') {
+            agent { docker 'openjdk:8-jre' } 
+            steps {
+                echo 'Hello, JDK'
+                sh 'java -version'
+            }
+        }
+    }
 }
