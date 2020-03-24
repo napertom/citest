@@ -1,18 +1,13 @@
 pipeline {
-    agent none
+    agent any
     stages {
-        stage('Example Linux') {
+        stage('Docker CentOS') {
             agent { docker 'centos' } 
             steps {
-                echo 'Hello, Linux'
+                echo 'Hello, CentOS Linux'
                 sh 'uname -a'
-            }
-        }
-        stage('Example JDK') {
-            agent { docker 'openjdk:8-jre' } 
-            steps {
-                echo 'Hello, JDK'
-                sh 'java -version'
+                sh 'id'
+                sh 'date'
             }
         }
     }
